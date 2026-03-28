@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Educational Resources Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Enhanced Form Tabs */
+        .form-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .form-tab {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .form-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .form-tab.active {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Tab Colors */
+        .tab-form1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .tab-form2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .tab-learner { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .tab-assess { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .tab-pedagogy { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .tab-diff { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .tab-schools { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            outline: none;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        /* Section-specific colors */
+        .form1-section .section-title { background: rgba(102, 126, 234, 0.3); }
+        .form2-section .section-title { background: rgba(245, 87, 108, 0.3); }
+        .learner-section .section-title { background: rgba(79, 172, 254, 0.3); }
+        .assess-section .section-title { background: rgba(67, 233, 123, 0.3); }
+        .pedagogy-section .section-title { background: rgba(250, 112, 154, 0.3); }
+        .diff-section .section-title { background: rgba(48, 207, 208, 0.3); }
+        .schools-section .section-title { background: rgba(168, 237, 234, 0.5); color: #333; }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .card-desc {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .download-btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .card:hover .download-btn {
+            transform: scale(1.05);
+        }
+
+        /* Special content cards */
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-left: 5px solid #d63031;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .highlight-box h4 {
+            color: #d63031;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .form-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .form-tab {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            grid-column: 1 / -1;
+            display: none;
+            padding: 20px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .example-header {
+            padding: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .example-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .example-body p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Complete Educational Resources</h1>
+            <p>Comprehensive learning materials and teaching resources</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="form-tabs">
+            <button class="form-tab tab-form1 active" onclick="showSection('form1')">📘 Form 1</button>
+            <button class="form-tab tab-form2" onclick="showSection('form2')">📗 Form 2</button>
+            <button class="form-tab tab-learner" onclick="showSection('learner')">📋 Learner Plans</button>
+            <button class="form-tab tab-assess" onclick="showSection('assessments')">📝 Assessments</button>
+            <button class="form-tab tab-pedagogy" onclick="showSection('pedagogy')">🎓 Pedagogical Exemplars</button>
+            <button class="form-tab tab-diff" onclick="showSection('differentiation')">🌟 Differentiation</button>
+            <button class="form-tab tab-schools" onclick="showSection('schools')">🏫 School Examples</button>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search resources...">
+        </div>
+
+        <!-- FORM 1 SECTION (ALL 26 SUBJECTS) -->
+        <div id="form1" class="section form1-section active">
+            <h2 class="section-title">📘 Form 1 Study Materials</h2>
+            <div class="subjects-grid">
+                <a href="downloads/form1/Add-mathematics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📐</div>
+                    <div class="card-title">Add-mathematics</div>
+                    <div class="card-desc">Advanced mathematical concepts and calculations</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Agriculture.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">🌾</div>
+                    <div class="card-title">Agriculture</div>
+                    <div class="card-desc">Farming techniques and crop production</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Applied-Technology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">⚙️</div>
+                    <div class="card-title">Applied-Technology</div>
+                    <div class="card-desc">Practical technology applications</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Art-and-design-foundation.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🎨</div>
+                    <div class="card-title">Art-and-design-foundation</div>
+                    <div class="card-desc">Basic principles of art and design</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Art-and-design-studio.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🖼️</div>
+                    <div class="card-title">Art-and-design-studio</div>
+                    <div class="card-desc">Practical studio work and projects</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Biology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🧬</div>
+                    <div class="card-title">Biology</div>
+                    <div class="card-desc">Life sciences and biological systems</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Business-Studies.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">💼</div>
+                    <div class="card-title">Business-Studies</div>
+                    <div class="card-desc">Commerce and business principles</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Chemistry.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">⚗️</div>
+                    <div class="card-title">Chemistry</div>
+                    <div class="card-desc">Chemical reactions and matter</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Design-and-Communication-Technology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">💻</div>
+                    <div class="card-title">Design-and-Communication-Technology</div>
+                    <div class="card-desc">Digital design and communication tools</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Economics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">📊</div>
+                    <div class="card-title">Economics</div>
+                    <div class="card-desc">Economic systems and theories</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/English-Language.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📖</div>
+                    <div class="card-title">English-Language</div>
+                    <div class="card-desc">Grammar, comprehension and writing</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/French.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🇫🇷</div>
+                    <div class="card-title">French</div>
+                    <div class="card-desc">French language and culture</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/General-Science.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🔬</div>
+                    <div class="card-title">General-Science</div>
+                    <div class="card-desc">Integrated science concepts</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Geography.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">🌍</div>
+                    <div class="card-title">Geography</div>
+                    <div class="card-desc">Physical and human geography</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Ghanaian-Languages.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🗣️</div>
+                    <div class="card-title">Ghanaian-Languages</div>
+                    <div class="card-desc">Local language studies</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Government.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">🏛️</div>
+                    <div class="card-title">Government</div>
+                    <div class="card-desc">Civic education and governance</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/History.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📜</div>
+                    <div class="card-title">History</div>
+                    <div class="card-desc">Historical events and timelines</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Home-Economics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏠</div>
+                    <div class="card-title">Home-Economics</div>
+                    <div class="card-desc">Life skills and home management</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/ICT.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">💾</div>
+                    <div class="card-title">ICT</div>
+                    <div class="card-desc">Information and Communication Technology</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Literature-in-English.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📚</div>
+                    <div class="card-title">Literature-in-English</div>
+                    <div class="card-desc">Poetry, prose and drama</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Mathematics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🔢</div>
+                    <div class="card-title">Mathematics</div>
+                    <div class="card-desc">Core mathematics curriculum</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/PE-Core.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">⚽</div>
+                    <div class="card-title">PE-Core</div>
+                    <div class="card-desc">Physical Education core activities</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/PEH-ELECTIVE.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🏃</div>
+                    <div class="card-title">PEH-ELECTIVE</div>
+                    <div class="card-desc">Physical Education elective studies</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Performing-Arts.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🎭</div>
+                    <div class="card-title">Performing-Arts</div>
+                    <div class="card-desc">Music, dance and drama</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Physics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⚛️</div>
+                    <div class="card-title">Physics</div>
+                    <div class="card-desc">Matter, energy and forces</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form1/Social-Studies.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">👥</div>
+                    <div class="card-title">Social-Studies</div>
+                    <div class="card-desc">Society and human relationships</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- FORM 2 SECTION (ALL 26 SUBJECTS) -->
+        <div id="form2" class="section form2-section">
+            <h2 class="section-title">📗 Form 2 Study Materials</h2>
+            <div class="subjects-grid">
+                <a href="downloads/form2/Add-mathematics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📐</div>
+                    <div class="card-title">Add-mathematics</div>
+                    <div class="card-desc">Advanced mathematical concepts and calculations</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Agriculture.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">🌾</div>
+                    <div class="card-title">Agriculture</div>
+                    <div class="card-desc">Farming techniques and crop production</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Applied-Technology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">⚙️</div>
+                    <div class="card-title">Applied-Technology</div>
+                    <div class="card-desc">Practical technology applications</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Art-and-design-foundation.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🎨</div>
+                    <div class="card-title">Art-and-design-foundation</div>
+                    <div class="card-desc">Basic principles of art and design</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Art-and-design-studio.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🖼️</div>
+                    <div class="card-title">Art-and-design-studio</div>
+                    <div class="card-desc">Practical studio work and projects</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Biology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🧬</div>
+                    <div class="card-title">Biology</div>
+                    <div class="card-desc">Life sciences and biological systems</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Business-Studies.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">💼</div>
+                    <div class="card-title">Business-Studies</div>
+                    <div class="card-desc">Commerce and business principles</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Chemistry.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">⚗️</div>
+                    <div class="card-title">Chemistry</div>
+                    <div class="card-desc">Chemical reactions and matter</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Design-and-Communication-Technology.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">💻</div>
+                    <div class="card-title">Design-and-Communication-Technology</div>
+                    <div class="card-desc">Digital design and communication tools</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Economics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">📊</div>
+                    <div class="card-title">Economics</div>
+                    <div class="card-desc">Economic systems and theories</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/English-Language.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📖</div>
+                    <div class="card-title">English-Language</div>
+                    <div class="card-desc">Grammar, comprehension and writing</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/French.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🇫</div>
+                    <div class="card-title">French</div>
+                    <div class="card-desc">French language and culture</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/General-Science.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🔬</div>
+                    <div class="card-title">General-Science</div>
+                    <div class="card-desc">Integrated science concepts</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Geography.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">🌍</div>
+                    <div class="card-title">Geography</div>
+                    <div class="card-desc">Physical and human geography</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Ghanaian-Languages.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🗣️</div>
+                    <div class="card-title">Ghanaian-Languages</div>
+                    <div class="card-desc">Local language studies</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Government.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">🏛️</div>
+                    <div class="card-title">Government</div>
+                    <div class="card-desc">Civic education and governance</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/History.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📜</div>
+                    <div class="card-title">History</div>
+                    <div class="card-desc">Historical events and timelines</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Home-Economics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏠</div>
+                    <div class="card-title">Home-Economics</div>
+                    <div class="card-desc">Life skills and home management</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/ICT.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">💾</div>
+                    <div class="card-title">ICT</div>
+                    <div class="card-desc">Information and Communication Technology</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Literature-in-English.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">📚</div>
+                    <div class="card-title">Literature-in-English</div>
+                    <div class="card-desc">Poetry, prose and drama</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Mathematics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🔢</div>
+                    <div class="card-title">Mathematics</div>
+                    <div class="card-desc">Core mathematics curriculum</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/PE-Core.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">⚽</div>
+                    <div class="card-title">PE-Core</div>
+                    <div class="card-desc">Physical Education core activities</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/PEH-ELECTIVE.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🏃</div>
+                    <div class="card-title">PEH-ELECTIVE</div>
+                    <div class="card-desc">Physical Education elective studies</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Performing-Arts.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🎭</div>
+                    <div class="card-title">Performing-Arts</div>
+                    <div class="card-desc">Music, dance and drama</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Physics.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">⚛️</div>
+                    <div class="card-title">Physics</div>
+                    <div class="card-desc">Matter, energy and forces</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+
+                <a href="downloads/form2/Social-Studies.pdf" class="card" download>
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">👥</div>
+                    <div class="card-title">Social-Studies</div>
+                    <div class="card-desc">Society and human relationships</div>
+                    <div class="download-btn">Download PDF ⬇️</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- LEARNER PLANS SECTION -->
+        <div id="learner" class="section learner-section">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 0.3);">📋 Learner Plans & Study Guides</h2>
+            <div class="resource-grid">
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        📅 Weekly Study Plan Template
+                    </div>
+                    <div class="example-body">
+                        <p>Structured weekly planning guide to help learners organize their study time effectively across all subjects.</p>
+                        <span class="tag">Time Management</span>
+                        <span class="tag">Planning</span>
+                        <a href="downloads/plans/weekly-study-plan.pdf" class="download-btn" download>Download Plan</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        🎯 Individual Learning Plan (ILP)
+                    </div>
+                    <div class="example-body">
+                        <p>Personalized learning plans tailored to individual student needs, strengths, and areas for improvement.</p>
+                        <span class="tag">Personalized</span>
+                        <span class="tag">Goal Setting</span>
+                        <a href="downloads/plans/individual-learning-plan.pdf" class="download-btn" download>Download ILP</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        📚 Term Revision Schedule
+                    </div>
+                    <div class="example-body">
+                        <p>Comprehensive revision timetable covering all topics before examinations with spaced repetition techniques.</p>
+                        <span class="tag">Revision</span>
+                        <span class="tag">Exam Prep</span>
+                        <a href="downloads/plans/term-revision-schedule.pdf" class="download-btn" download>Download Schedule</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        🧠 Study Skills Guide
+                    </div>
+                    <div class="example-body">
+                        <p>Effective study techniques including note-taking methods, memory tricks, and concentration strategies.</p>
+                        <span class="tag">Study Skills</span>
+                        <span class="tag">Techniques</span>
+                        <a href="downloads/plans/study-skills-guide.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        📈 Progress Tracking Sheet
+                    </div>
+                    <div class="example-body">
+                        <p>Monitor academic progress with this comprehensive tracking tool for students and teachers.</p>
+                        <span class="tag">Assessment</span>
+                        <span class="tag">Tracking</span>
+                        <a href="downloads/plans/progress-tracking.pdf" class="download-btn" download>Download Tracker</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        🎓 Career Guidance Plan
+                    </div>
+                    <div class="example-body">
+                        <p>Subject selection guide and career pathway planning for senior students.</p>
+                        <span class="tag">Career</span>
+                        <span class="tag">Guidance</span>
+                        <a href="downloads/plans/career-guidance.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ASSESSMENTS SECTION -->
+        <div id="assessments" class="section assess-section">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 0.3);">📝 Assessments & Evaluation Tools</h2>
+            <div class="resource-grid">
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        📋 Formative Assessment Templates
+                    </div>
+                    <div class="example-body">
+                        <p>Ready-to-use formative assessment tools for continuous evaluation and feedback during learning.</p>
+                        <span class="tag">Formative</span>
+                        <span class="tag">Continuous</span>
+                        <a href="downloads/assessments/formative-assessment.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        ✅ Summative Assessment Rubrics
+                    </div>
+                    <div class="example-body">
+                        <p>Comprehensive rubrics for end-of-term assessments with clear marking schemes.</p>
+                        <span class="tag">Summative</span>
+                        <span class="tag">Rubrics</span>
+                        <a href="downloads/assessments/summative-rubrics.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        🎯 Diagnostic Tests
+                    </div>
+                    <div class="example-body">
+                        <p>Pre-assessment tools to identify student prior knowledge and learning gaps.</p>
+                        <span class="tag">Diagnostic</span>
+                        <span class="tag">Pre-test</span>
+                        <a href="downloads/assessments/diagnostic-tests.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        📊 Assessment Data Analysis
+                    </div>
+                    <div class="example-body">
+                        <p>Tools and templates for analyzing assessment results and identifying trends.</p>
+                        <span class="tag">Data</span>
+                        <span class="tag">Analysis</span>
+                        <a href="downloads/assessments/data-analysis.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        📝 Question Bank
+                    </div>
+                    <div class="example-body">
+                        <p>Extensive collection of questions across all subjects and difficulty levels.</p>
+                        <span class="tag">Questions</span>
+                        <span class="tag">Bank</span>
+                        <a href="downloads/assessments/question-bank.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        🎓 Peer Assessment Guide
+                    </div>
+                    <div class="example-body">
+                        <p>Structured peer evaluation tools to promote collaborative learning.</p>
+                        <span class="tag">Peer</span>
+                        <span class="tag">Assessment</span>
+                        <a href="downloads/assessments/peer-assessment.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PEDAGOGICAL EXEMPLARS SECTION -->
+        <div id="pedagogy" class="section pedagogy-section">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 0.3);">🎓 Pedagogical Exemplars & Best Practices</h2>
+            <div class="resource-grid">
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        🎯 Student-Centered Learning
+                    </div>
+                    <div class="example-body">
+                        <p>Strategies and examples for implementing student-centered approaches in the classroom.</p>
+                        <span class="tag">Active Learning</span>
+                        <span class="tag">Engagement</span>
+                        <a href="downloads/pedagogy/student-centered.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        🔄 Differentiated Instruction
+                    </div>
+                    <div class="example-body">
+                        <p>Practical examples of differentiating content, process, and product for diverse learners.</p>
+                        <span class="tag">Differentiation</span>
+                        <span class="tag">Inclusion</span>
+                        <a href="downloads/pedagogy/differentiated-instruction.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        💡 Inquiry-Based Learning
+                    </div>
+                    <div class="example-body">
+                        <p>Framework for fostering curiosity and critical thinking through inquiry methods.</p>
+                        <span class="tag">Inquiry</span>
+                        <span class="tag">Critical Thinking</span>
+                        <a href="downloads/pedagogy/inquiry-based.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        🤝 Collaborative Learning
+                    </div>
+                    <div class="example-body">
+                        <p>Structures and strategies for effective group work and peer collaboration.</p>
+                        <span class="tag">Collaboration</span>
+                        <span class="tag">Teamwork</span>
+                        <a href="downloads/pedagogy/collaborative-learning.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        📱 Technology Integration
+                    </div>
+                    <div class="example-body">
+                        <p>Best practices for integrating educational technology meaningfully into lessons.</p>
+                        <span class="tag">EdTech</span>
+                        <span class="tag">Digital</span>
+                        <a href="downloads/pedagogy/tech-integration.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        🎨 Project-Based Learning
+                    </div>
+                    <div class="example-body">
+                        <p>Real-world project examples that engage students in meaningful learning experiences.</p>
+                        <span class="tag">PBL</span>
+                        <span class="tag">Projects</span>
+                        <a href="downloads/pedagogy/project-based.pdf" class="download-btn" download>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIFFERENTIATION SECTION -->
+        <div id="differentiation" class="section diff-section">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 0.3);">🌟 Key Notes on Differentiation</h2>
+            
+            <div class="info-card" style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);">
+                <h3>📌 What is Differentiation?</h3>
+                <p>Differentiation is a teaching approach where educators proactively plan and implement varied approaches to content, process, and product in anticipation of and in response to student differences in readiness, interests, and learning needs.</p>
+            </div>
+
+            <div class="resource-grid">
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        📚 Content Differentiation
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What it means:</strong> Varying what students learn or how they access information</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Provide texts at different reading levels</li>
+                            <li>✓ Use multimedia resources (videos, audio)</li>
+                            <li>✓ Offer choice in topics to study</li>
+                            <li>✓ Pre-teach vocabulary for struggling learners</li>
+                            <li>✓ Provide extension materials for advanced students</li>
+                        </ul>
+                        <a href="downloads/differentiation/content-diff.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        ⚙️ Process Differentiation
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What it means:</strong> Varying how students make sense of ideas and information</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Tiered activities at different complexity levels</li>
+                            <li>✓ Learning stations with varied tasks</li>
+                            <li>✓ Flexible grouping strategies</li>
+                            <li>✓ Choice boards for activities</li>
+                            <li>✓ Varied time allowances for tasks</li>
+                        </ul>
+                        <a href="downloads/differentiation/process-diff.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        📝 Product Differentiation
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What it means:</strong> Varying how students demonstrate what they've learned</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Choice in assessment formats</li>
+                            <li>✓ Projects, presentations, or written work</li>
+                            <li>✓ Creative demonstrations of learning</li>
+                            <li>✓ Varied rubrics for different products</li>
+                            <li>✓ Student choice in showing mastery</li>
+                        </ul>
+                        <a href="downloads/differentiation/product-diff.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        🎯 Learning Environment
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What it means:</strong> Creating a supportive classroom climate</p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Flexible seating arrangements</li>
+                            <li>✓ Safe space for risk-taking</li>
+                            <li>✓ Clear routines and expectations</li>
+                            <li>✓ Respect for all learners</li>
+                            <li>✓ Growth mindset culture</li>
+                        </ul>
+                        <a href="downloads/differentiation/environment-diff.pdf" class="download-btn" download>Download Guide</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 Key Principles of Differentiation:</h4>
+                <ul style="list-style: none;">
+                    <li>✓ Start with clear learning objectives</li>
+                    <li>✓ Know your students' readiness, interests, and learning profiles</li>
+                    <li>✓ Use ongoing assessment to inform instruction</li>
+                    <li>✓ Provide multiple pathways to learning</li>
+                    <li>✓ Maintain high expectations for all students</li>
+                    <li>✓ Create a respectful and supportive community</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SCHOOL EXAMPLES SECTION -->
+        <div id="schools" class="section schools-section">
+            <h2 class="section-title" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 0.5); color: #333;">🏫 How Other Schools Implement These Strategies</h2>
+            
+            <div class="resource-grid">
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        🌟 Case Study: Excellence Academy
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What they did:</strong> Implemented school-wide differentiated instruction program</p>
+                        <p><strong>Results:</strong> 35% improvement in student engagement and 28% increase in test scores</p>
+                        <p><strong>Key Strategies:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Weekly professional development</li>
+                            <li>✓ Peer observation program</li>
+                            <li>✓ Student choice boards</li>
+                            <li>✓ Flexible grouping</li>
+                        </ul>
+                        <a href="downloads/schools/excellence-academy.pdf" class="download-btn" download>Download Case Study</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white;">
+                         Case Study: Innovation High School
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What they did:</strong> Technology-integrated personalized learning</p>
+                        <p><strong>Results:</strong> 40% reduction in achievement gap</p>
+                        <p><strong>Key Strategies:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Adaptive learning software</li>
+                            <li>✓ Digital portfolios</li>
+                            <li>✓ Self-paced modules</li>
+                            <li>✓ Data-driven instruction</li>
+                        </ul>
+                        <a href="downloads/schools/innovation-high.pdf" class="download-btn" download>Download Case Study</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                        🌟 Case Study: Global Learning Center
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What they did:</strong> Project-based learning across curriculum</p>
+                        <p><strong>Results:</strong> Improved critical thinking and collaboration skills</p>
+                        <p><strong>Key Strategies:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Interdisciplinary projects</li>
+                            <li>✓ Community partnerships</li>
+                            <li>✓ Student-led conferences</li>
+                            <li>✓ Authentic assessments</li>
+                        </ul>
+                        <a href="downloads/schools/global-learning.pdf" class="download-btn" download>Download Case Study</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); color: white;">
+                        🌟 Case Study: Inclusive Education School
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What they did:</strong> Full inclusion model with co-teaching</p>
+                        <p><strong>Results:</strong> All students showed academic growth</p>
+                        <p><strong>Key Strategies:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Co-teaching model</li>
+                            <li>✓ Universal Design for Learning</li>
+                            <li>✓ Multi-tiered support system</li>
+                            <li>✓ Assistive technology</li>
+                        </ul>
+                        <a href="downloads/schools/inclusive-school.pdf" class="download-btn" download>Download Case Study</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                        🌟 Case Study: STEM Academy
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What they did:</strong> Inquiry-based STEM curriculum</p>
+                        <p><strong>Results:</strong> Increased student interest in STEM careers</p>
+                        <p><strong>Key Strategies:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Hands-on experiments</li>
+                            <li>✓ Real-world problem solving</li>
+                            <li>✓ Industry partnerships</li>
+                            <li>✓ Student research projects</li>
+                        </ul>
+                        <a href="downloads/schools/stem-academy.pdf" class="download-btn" download>Download Case Study</a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        🌟 Best Practices Compilation
+                    </div>
+                    <div class="example-body">
+                        <p><strong>What's included:</strong> Collection of successful strategies from 50+ schools</p>
+                        <p><strong>Topics covered:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>✓ Classroom management</li>
+                            <li>✓ Assessment strategies</li>
+                            <li>✓ Parent engagement</li>
+                            <li>✓ Professional development</li>
+                            <li>✓ Resource allocation</li>
+                        </ul>
+                        <a href="downloads/schools/best-practices.pdf" class="download-btn" download>Download Compilation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Educational Resources Portal. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Empowering educators and learners worldwide 🌍</p>
+        </footer>
+    </div>
+
+    <script>
+        // Section switching
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.form-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Clear search input
+            document.getElementById('searchInput').value = '';
+            
+            // Reset search results
+            resetSearch();
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const activeSection = document.querySelector('.section.active');
+            const cards = activeSection.querySelectorAll('.card, .example-card');
+            const noResults = activeSection.querySelector('.no-results');
+            
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+        });
+
+        function resetSearch() {
+            const activeSection = document.querySelector('.section.active');
+            const cards = activeSection.querySelectorAll('.card, .example-card');
+            const noResults = activeSection.querySelector('.no-results');
+            
+            cards.forEach(card => {
+                card.style.display = 'flex';
+            });
+            
+            if (noResults) {
+                noResults.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
